@@ -5,8 +5,8 @@ development:
       hosts:
         - localhost:27017
       options:
-         user: 'prices'
-         password: 'netlabcom'
+        user: 'prices'
+        password: 'netlabcom'
   options:
 test:
   clients:
@@ -21,10 +21,10 @@ test:
 production:
   clients:
     default:
-      database: <%= ENV['mongodb_db'] %>
+      database: <%=ENV['mongodb_db']%>
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
       options:
-         user: <%= ENV['mongodb_user'] %>
-         password: <%= ENV['mongodb_pass'] %>
+        user: '<%=ENV['mongodb_user']%>'
+        password: '<%=ENV['mongodb_pass']%>'
   options:

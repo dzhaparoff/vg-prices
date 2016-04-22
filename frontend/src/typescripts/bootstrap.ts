@@ -11,6 +11,6 @@ import { enableProdMode } from "angular2/core";
 import { PriceService }      from './prices/services/price.service'
 import { ExportService }      from './exports/services/export.service'
 
-//enableProdMode();
+enableProdMode();
 
 bootstrap(AppComponent, [ HTTP_PROVIDERS, PriceService, ExportService ]);
