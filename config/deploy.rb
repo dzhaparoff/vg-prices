@@ -17,7 +17,8 @@ set :linked_files, fetch(:linked_files, [])
                            'config/puma.rb',
                            'config/secrets.yml',
                            'config/cable.yml',
-                           'config/application.yml'
+                           'config/application.yml',
+                           'frontend/package.json'
                        )
 
 set :linked_dirs, fetch(:linked_dirs, [])
@@ -87,7 +88,10 @@ namespace :deploy do
   end
 
   after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
+    on roles(:app) do
+      execute "cd '#{shared_path}/frontend'; npm install"
+      execute "cd '#{shared_path}/frontend'; bower install"
+
       # Here we can do anything such as:
       # within release_path do
       #   execute :rake, 'cache:clear'

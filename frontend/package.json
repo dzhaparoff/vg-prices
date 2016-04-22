@@ -5,8 +5,9 @@
   "author": "Ed Dzhaparoff",
   "scripts": {
     "gulp": "gulp --env=development",
-    "typings": "typings",
-    "postinstall": "typings install"
+    "precompile": "gulp --env=production",
+    "typings": "typings"
+//    "postinstall": "typings install"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.14",
