@@ -12,4 +12,4 @@
 
 production:
   SECRET_KEY_BASE: WJM6NhtpcUvjpE4sFkAmL5jfNnufmbeTxRAaYD92pfVpKQrgZRtCxnuVky2gm6ZHysu9UtZUjMTUd9M4B5gX4mJYKA7GgHeFYyEw
-  mongodb_pass:
+  mongodb_pass: sdfasdfa
