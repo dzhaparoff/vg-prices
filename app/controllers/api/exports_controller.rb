@@ -31,8 +31,6 @@ class Api::ExportsController < Api::ApiController
 
     res_body = JSON.parse(res.body)
 
-    ap res_body
-
     @exports.each do |e|
       e.update(
           exported_at:  DateTime.now,

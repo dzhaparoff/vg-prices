@@ -4,7 +4,6 @@ class Api::SheetsController < Api::ApiController
   end
 
   def show
-    ap params
     @sheet = Price.find(params[:price_id]).sheets.find(params[:id])
   end
 

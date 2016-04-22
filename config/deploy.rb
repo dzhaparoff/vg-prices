@@ -14,6 +14,7 @@ set :keep_releases, 3
 set :linked_files, fetch(:linked_files, [])
                        .push(
                            'config/database.yml',
+                           'config/mongoid.yml',
                            'config/puma.rb',
                            'config/secrets.yml',
                            'config/cable.yml',
