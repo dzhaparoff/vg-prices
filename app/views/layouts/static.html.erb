@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/stylesheets/application.css">
+  <title>Все-Генераторы - прайс листы</title>
+
+  <base href="/">
+
+  <script src="/node_modules/es6-shim/es6-shim.min.js"></script>
+  <script src="/node_modules/systemjs/dist/system-polyfills.js"></script>
+  <script src="/node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+
+  <script src="/node_modules/angular2/bundles/angular2-polyfills.js"></script>
+  <script src="/node_modules/systemjs/dist/system.src.js"></script>
+  <script src="/node_modules/rxjs/bundles/Rx.js"></script>
+
+  <script src="/node_modules/angular2/bundles/angular2.dev.js"></script>
+  <script src="/node_modules/angular2/bundles/router.dev.js"></script>
+  <script src="/node_modules/angular2/bundles/http.dev.js"></script>
+  <script>
+    System.config({
+      packages: {
+        '/assets/javascripts': {
+          format: 'register',
+          defaultExtension: 'js'
+        },
+        'node_modules': {
+          defaultExtension: 'js'
+        }
+      },
+      map: {
+        'ng2-file-upload': '/node_modules/ng2-file-upload/ng2-file-upload.js',
+        'moment': '/node_modules/moment/min/moment.min.js',
+        'lodash': '/node_modules/lodash/lodash.min.js'
+      }
+    });
+    System.import('/assets/javascripts/bootstrap')
+        .then(null, console.error.bind(console));
+  </script>
+</head>
+<body>
+  <app-main>
+    <%= yield %>
+  </app-main>
+  <script src="/assets/javascripts/application.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+json.array! @export, :name, :sku, :offer_prices, :updated_at

@@ -1,0 +1,101 @@
+<div class="row p-t-30">
+  <div class="columns small-12">
+    <h5><a [routerLink]="['PricesEdit']">&larr;</a> Страница {{sheet.name}}</h5>
+  </div>
+  <div class="columns small-12">
+    <form (ngSubmit)="updateSheet()">
+      <div class="row p-t-20" *ngIf="data_loaded">
+        <div class="columns medium-6">
+          <h6>Конфигурация страницы</h6>
+        </div>
+        <div class="columns medium-6">
+          <div class="select-configuration-type text-right">
+            <div class="hollow button" type="button"
+                    *ngFor="#conf of configuration_types"
+                    [class.selected]="selectedConfiguration(conf.type)"
+                    (click)="selectConfiguration(conf.type)">{{conf.title}}</div>
+          </div>
+        </div>
+        <div class="columns small-2 columns-labels">
+          <div class="column-select-dummy"></div>
+          <div class="column-select-label">Название</div>
+          <div class="column-select-label">Артикул</div>
+          <div class="column-select-label">Цена</div>
+        </div>
+        <div class="columns small-10">
+          <div class="columns-select-wrapper">
+            <div class="column-select" *ngFor="#column_number of simple_configuration.columns">
+              <div class="column-header">{{column_number}}</div>
+              <div class="column-body">
+                <div class="column-select-option"
+                     [class.selected]="columnSelectedFor('name', column_number)"
+                     (click)="selectColumn('name', column_number)"></div>
+                <div class="column-select-option"
+                     [class.selected]="columnSelectedFor('sku', column_number)"
+                     (click)="selectColumn('sku', column_number)"></div>
+                <div class="column-select-option"
+                     [class.selected]="columnSelectedFor('price', column_number)"
+                     (click)="selectColumn('price', column_number)"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row p-t-20" *ngIf="data_loaded">
+        <div class="medium-4 columns">
+          <label>Валюта
+          <div class="select-currency">
+            <div class="option button hollow"
+                 *ngFor="#currency of currencies"
+                 [class.selected]="selectedCurrency(currency)"
+                 (click)="selectCurrency(currency)">{{currency}}</div>
+          </div>
+          </label>
+        </div>
+        <div class="medium-4 columns">
+          <label for="markup">Цена закупки меньше на
+            <input type="text" id="markup" placeholder="наценка в %" [(ngModel)]="sheet.price_config.purchase_markup">
+          </label>
+        </div>
+        <div class="medium-4 columns">
+          <label for="markup">Наценка продажи
+            <input type="text" id="markup" placeholder="наценка в %" [(ngModel)]="sheet.price_config.retail_markup">
+          </label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="columns medium-12 text-right">
+          <button class="button hollow success" type="submit">Сохранить</button>
+          <button class="button hollow" *ngIf="sheet.configurated" type="button" (click)="parseOffers()">Парсить товары</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row p-t-20" *ngIf="sheet.offers_parsed">
+  <h5>Товары на странице</h5>
+  <table class="hover">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Артикул</th>
+        <th>Валюта</th>
+        <th>Цена в прайсе</th>
+        <th>Закупочная</th>
+        <th>Розничная</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="#offer of sheet.offers">
+      <td>{{offer.name}}</td>
+      <td>{{offer.sku}}</td>
+      <td>{{offer.offer_prices[0].currency}}</td>
+      <td>{{offer.offer_prices[0].amount}}</td>
+      <td>{{offer.offer_prices[1].amount}}</td>
+      <td>{{offer.offer_prices[2].amount}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

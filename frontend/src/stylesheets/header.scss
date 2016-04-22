@@ -1,0 +1,16 @@
+header#main-header {
+  height: rem-calc(80px);
+  .top-bar {
+    .app-name {
+      color: $yellow;
+      cursor: default;
+    }
+
+    a {
+      color: $white;
+      &.router-link-active {
+        color: #FFEED7;
+      }
+    }
+  }
+}

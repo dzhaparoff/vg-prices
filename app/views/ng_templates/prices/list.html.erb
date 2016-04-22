@@ -1,0 +1,53 @@
+<section class="items-list">
+  <div class="row">
+    <div class="columns small-12">
+      <h5>Мои прайсы</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns small-12">
+      <table class="hover prices-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Название</th>
+            <th>Создан</th>
+            <th>Обновлен</th>
+            <th class="text-center">Файл прикреплен</th>
+            <th class="text-center">Страниц</th>
+            <th class="text-center">Товаров</th>
+            <th width="230"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#price of prices"
+            [class.selected]="priceSelected(price)">
+          <td class="text-center"><div class="checkbox" (click)="priceSelect(price)"></div></td>
+          <td>{{price.name}}</td>
+          <td>{{price.created_at | formatted_date : "DD-MM-YYYY HH:mm"}}</td>
+          <td>{{price.updated_at | formatted_date : "DD-MM-YYYY HH:mm"}}</td>
+          <td class="text-center">
+            <span [ngSwitch]="price.spreadsheet_loaded">
+              <span *ngSwitchWhen="true">Да</span>
+              <span *ngSwitchWhen="false">Нет</span>
+            </span>
+          </td>
+          <td class="text-center"><span *ngIf="price.spreadsheet_loaded">{{price.sheets_count}}</span></td>
+          <td class="text-center"><span *ngIf="price.spreadsheet_loaded">{{price.offers_count}}</span></td>
+          <td class="text-right action-cell">
+            <div class="button-group">
+              <a class="hollow button secondary" [routerLink]="['PricesShow', { id: price.id.$oid }, 'PricesEdit']">Настройки</a>
+              <a class="hollow button alert"     (click)="deletePrice(price)">Удалить</a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row" *ngIf="exportAvailable()">
+    <div class="columns small-12 text-right">
+      <button type="button" class="button hollow" (click)="exportOffers()">Выгрузить выбранные</button>
+    </div>
+  </div>
+</section>

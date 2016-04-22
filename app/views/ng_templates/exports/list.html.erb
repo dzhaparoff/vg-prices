@@ -1,0 +1,56 @@
+<section class="items-list">
+  <div class="row">
+    <div class="columns small-12">
+      <h5>Мои выгрузки</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="columns small-12">
+      <table class="hover prices-table">
+        <thead>
+        <tr>
+          <th></th>
+          <th>Создана</th>
+          <th>Прайсы в выгрузке</th>
+          <th colspan="2">Выгружена</th>
+          <th>Файл</th>
+          <th width="220"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#export of exports"
+            [class.selected]="exportSelected(export)">
+          <td class="text-center"><div class="checkbox" (click)="exportSelect(export)"></div></td>
+          <td>{{export.created_at | formatted_date : "DD-MM-YYYY HH:mm"}}</td>
+          <td>
+            <span *ngFor="#price of export.prices; #last=last">
+              <a [routerLink]="['/Prices', 'PricesShow', { id: price.id.$oid }, 'PricesEdit']">{{price.name}}</a>
+              <span *ngIf="!last">, </span></span>
+          </td>
+          <td>
+            <span *ngIf="export.exported">{{export.exported_at | formatted_date : "DD-MM-YYYY HH:mm"}}</span>
+            <span *ngIf="!export.exported">еще нет</span>
+          </td>
+          <td>
+            <span *ngIf="export.exported">Всего: {{export.api_responce.offers_count}}<br/>
+              обработано: {{export.api_responce.updated_count}}<br/>
+              не найдено: {{export.api_responce.not_found_count}}</span>
+          </td>
+          <td><a [href]="export.file" target="_blank">Файл выгрузки</a> ({{export.file_size | filesize}})</td>
+          <td class="text-right action-cell">
+            <div class="button-group text-right">
+              <a *ngIf="export.exported" class="hollow button" [routerLink]="['ExportsShow', {id: export.id.$oid}]">Смотреть</a>
+              <a class="hollow button alert" (click)="deleteExport(export)">Удалить</a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row" *ngIf="exportAvailable()">
+    <div class="columns small-12 text-right">
+      <button type="button" class="button hollow" (click)="doExport()">Выгрузить выбранные в интернет магазин</button>
+    </div>
+  </div>
+</section>

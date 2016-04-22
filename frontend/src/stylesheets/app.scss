@@ -1,0 +1,100 @@
+.in-page-navigation {
+  .button {
+    &.router-link-active {
+      border-color: $black;
+      background: $black;
+      color: $yellow;
+    }
+  }
+}
+
+.p-t-10 {
+  padding-top: rem-calc(10);
+}
+
+.p-t-20 {
+  padding-top: rem-calc(20);
+}
+
+.p-t-30 {
+  padding-top: rem-calc(30);
+}
+
+
+
+table {
+  thead {
+    th {
+      font-weight: normal;
+      font-size: rem-calc(14);
+    }
+  }
+  .action-cell {
+    .button-group {
+      margin-bottom: 0;
+    }
+    .button {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.new-form, .edit-form, .items-list {
+  padding: rem-calc(40px) 0;
+}
+
+
+
+.file-loader-wrapper {
+  .file-drop-zone {
+    width: 100%;
+    height: rem-calc(200);
+    border: rem-calc(3px) dashed $yellow;
+    text-align: center;
+    padding: rem-calc(80) rem-calc(10) 0;
+    transition: border 0.35s ease;
+
+    .name {
+      width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    &.file-over{
+      border-color: #4a72aa;
+    }
+  }
+  .button-group {
+    width: 100%;
+    margin: rem-calc(12 0 0 0);
+    & > .button {
+      width: 50%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: center;
+      margin: 0;
+    }
+  }
+  .loading-box {
+    position: relative;
+    width: 100%;
+    margin: rem-calc(4px 0);
+    height: rem-calc(6px);
+    background: #f0f0f0;
+    .loading-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background: $yellow;
+      width: 60%;
+      transition: all .2s ease;
+    }
+  }
+}
+
+.box {
+  padding: rem-calc(18);
+  background: #fafafe;
+}

@@ -1,0 +1,76 @@
+<section class="new-form">
+  <div class="row">
+    <div class="columns small-12 medium-1">
+      <button [routerLink]="['PricesList']">&larr; Назад</button>
+    </div>
+    <div class="columns small-10 small-pull-1">
+      <div class="row">
+        <div class="columns small-12">
+          <h5>Настройки прайса</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="columns small-12">
+          <form (ngSubmit)="updatePrice()">
+            <div class="row">
+              <div class="medium-12 columns">
+                <div class="row">
+                  <div class="columns medium-9">
+                    <div class="row">
+                      <div class="columns small-12">
+                        <label>Название
+                          <input type="text" placeholder="Введите название прайса" required [(ngModel)]="price.name" ngControl="name">
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="columns small-12">
+                        <label>Префикс артикула
+                          <input type="text" placeholder="Введите префикс" required [(ngModel)]="price.sku_prefix" ngControl="sku_prefix">
+                        </label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="columns small-12 text-right">
+                        <button class="button hollow success" type="submit">Сохранить</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="medium-3 columns file-loader-wrapper">
+                    <div ng2-file-drop
+                         [ngClass]="{'file-over': hasFileOver}"
+                         (drop)="dropFile($event)"
+                         (fileOver)="dragFileOver($event)"
+                         [uploader]="uploader"
+                         class="well file-drop-zone">
+                      <div *ngIf="uploader.queue[0]">
+                        <div class="name">{{uploader.queue[0].file.name}}</div>
+                        <div class="size">{{uploader.queue[0].file.size | filesize}}</div>
+                      </div>
+                      <div *ngIf="!uploader.queue[0] && price.spreadsheet_file">
+                        <div class="name">
+                          <a [href]="price.spreadsheet">{{price.spreadsheet_file.name}}</a></div>
+                        <div class="size">{{price.spreadsheet_file.size | filesize}}</div>
+                      </div>
+                      <div *ngIf="!uploader.queue[0] && !price.spreadsheet_file">
+                        Загрузить файл
+                      </div>
+                    </div>
+                    <div class="button-group" *ngIf="uploader.queue[0] && uploader.progress == 0">
+                      <a class="button hollow alert" (click)="cancel_and_delete_queue_files()">Отменить</a>
+                      <a class="button hollow success" (click)="uploader.uploadAll()">Отправить</a>
+                    </div>
+                    <div class="loading-box" *ngIf="uploader.queue[0] && uploader.progress > 0">
+                      <div class="loading-bar" [ngStyle]="{width: uploader.progress + '%'}"></div>
+                    </div>
+                  </div>
+                </div>
+                <router-outlet></router-outlet>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

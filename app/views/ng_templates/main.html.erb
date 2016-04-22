@@ -1,0 +1,15 @@
+<header id="main-header">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <ul class="menu" data-dropdown-menu>
+        <li class="menu-text app-name" [routerLink]="['Dashboard']">Все-Генераторы</li>
+        <li><a [routerLink]="['Prices', 'PricesList']">Прайсы</a></li>
+        <li><a [routerLink]="['Exports', 'ExportsList']">Выгрузки</a></li>
+      </ul>
+    </div>
+    <div class="top-bar-right">
+
+    </div>
+  </div>
+</header>
+<router-outlet></router-outlet>

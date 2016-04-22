@@ -1,0 +1,37 @@
+<div class="row" *ngIf="price_component.price.spreadsheet_loaded">
+  <div class="columns small-12">
+    <h5>Страницы в прайсе</h5>
+    <table *ngIf="sheets.length > 0">
+      <thead>
+      <tr>
+        <th width="50" class="text-center">Номер</th>
+        <th>Название</th>
+        <th>Обновлен</th>
+        <th>Настроен</th>
+        <th>Товаров</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tr *ngFor="#sheet of sheets">
+        <td class="text-center">{{sheet.number + 1}}</td>
+        <td>{{sheet.name}}</td>
+        <td>{{sheet.updated_at | formatted_date : "DD-MM-YYYY HH:mm"}}</td>
+        <td>
+          <span [ngSwitch]="sheet.configurated">
+            <span *ngSwitchWhen="true">Да</span>
+            <span *ngSwitchWhen="false">Нет</span>
+          </span>
+        </td>
+        <td>
+          {{sheet.offers_count}}
+        </td>
+        <td class="text-right"><a [routerLink]="['SheetsEdit', {id: sheet.id.$oid}]">настроить &rarr;</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row" *ngIf="price_component.price.spreadsheet_loaded">
+  <div class="columns small-12 text-right">
+    <button class="button hollow success" type="button" (click)="create_sheets()">Обновить страницы</button>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<section class="new-form">
+  <div class="row">
+    <div class="columns small-12 medium-1">
+      <button [routerLink]="['PricesList']">&larr; Назад</button>
+    </div>
+    <div class="columns small-10 small-pull-1">
+      <div class="row">
+        <div class="columns small-12">
+          <h5>Новый прайс</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="columns small-12">
+          <form (ngSubmit)="create_price()">
+            <div class="row">
+              <div class="medium-12 columns">
+                <label>Название
+                  <input type="text" placeholder="Введите название прайса" required [(ngModel)]="price.name" ngControl="name" #spy>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="columns small-12 text-right">
+                <button class="button" type="submit">Создать</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
