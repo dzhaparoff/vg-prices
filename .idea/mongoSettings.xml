@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MongoConfiguration">
+    <option name="serverConfigurations">
+      <list>
+        <ServerConfiguration>
+          <option name="authenticationDatabase" value="admin" />
+          <option name="label" value="Prices" />
+          <option name="password" value="netlabcom" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="userDatabase" value="prices_dev" />
+          <option name="username" value="prices" />
+        </ServerConfiguration>
+      </list>
+    </option>
+  </component>
+</project>
