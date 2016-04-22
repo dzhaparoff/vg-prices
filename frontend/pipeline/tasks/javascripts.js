@@ -13,14 +13,6 @@ export const javascripts = function(){
 
   const webpack_plugins = [];
 
-  if(config.is_production)
-    webpack_plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-          sourceMap: true,
-          mangle: false
-        })
-    );
-
   webpack_plugins.push(
       new webpack.ResolverPlugin(
           new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
@@ -32,6 +24,14 @@ export const javascripts = function(){
           {'$': 'jquery', jQuery: 'jquery'}
       )
   );
+
+  // if(config.is_production)
+  //   webpack_plugins.push(
+  //       new webpack.optimize.UglifyJsPlugin({
+  //         sourceMap: true,
+  //         mangle: false
+  //       })
+  //   );
 
   return gulp.src(config.javascripts.src)
       .pipe(webpack_stream(
@@ -65,6 +65,7 @@ export const javascripts = function(){
             plugins: webpack_plugins
           }
       ))
+      .pipe($.if(config.is_production,  $.uglify()))
       .pipe(gulp.dest(config.javascripts.dest))
       .pipe(browser.reload({ stream: true }));
 };

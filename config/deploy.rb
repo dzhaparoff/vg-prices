@@ -18,7 +18,9 @@ set :linked_files, fetch(:linked_files, [])
                            'config/secrets.yml',
                            'config/cable.yml',
                            'config/application.yml',
-                           'frontend/package.json'
+                           'frontend/package.json',
+                           'frontend/bower.json',
+                           'frontend/.bowerrc'
                        )
 
 set :linked_dirs, fetch(:linked_dirs, [])
