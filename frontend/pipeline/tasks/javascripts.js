@@ -65,7 +65,7 @@ export const javascripts = function(){
             plugins: webpack_plugins
           }
       ))
-      .pipe($.if(config.is_production,  $.uglify()))
+      // .pipe($.if(config.is_production,  $.uglify()))
       .pipe(gulp.dest(config.javascripts.dest))
       .pipe(browser.reload({ stream: true }));
 };
