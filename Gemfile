@@ -14,8 +14,7 @@ gem 'sqlite3'
 gem 'high_voltage', '~> 2.4.0'
 
 # Models
-# gem 'mongoid', '>= 6.0.0', git: 'https://github.com/mongodb/mongoid'
-gem 'mongoid', git: 'https://github.com/estolfo/mongoid.git', branch: 'MONGOID-4218-rails-5'
+gem 'mongoid', '>= 6.0.0', git: 'https://github.com/mongodb/mongoid'
 gem 'paperclip', '~> 5.0.0.beta1'
 gem 'mongoid-paperclip', require: 'mongoid_paperclip'
 # gem 'mongoid-enum'

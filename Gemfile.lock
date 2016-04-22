@@ -1,11 +1,10 @@
 GIT
-  remote: https://github.com/estolfo/mongoid.git
-  revision: 50f62bab23766c864bc1a12af60d002f6b66550e
-  branch: MONGOID-4218-rails-5
+  remote: https://github.com/mongodb/mongoid
+  revision: b1866c25ff32756b4458f6c4a1838bcf017b1d9d
   specs:
     mongoid (6.0.0)
       activemodel (= 5.0.0.beta3)
-      mongo (~> 2.1)
+      mongo (~> 2.2)
       tzinfo (>= 0.3.37)
 
 GIT
@@ -69,7 +68,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bson (4.0.4)
+    bson (4.1.0)
     builder (3.2.2)
     byebug (8.2.2)
     capistrano (3.4.0)
@@ -248,7 +247,7 @@ DEPENDENCIES
   high_voltage (~> 2.4.0)
   jbuilder (~> 2.0)
   listen (~> 3.0.5)
-  mongoid!
+  mongoid (>= 6.0.0)!
   mongoid-paperclip
   nokogiri
   paperclip (~> 5.0.0.beta1)
