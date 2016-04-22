@@ -11,8 +11,6 @@ gem 'redis', '~> 3.0'
 
 gem 'sqlite3'
 
-gem 'high_voltage', '~> 2.4.0'
-
 # Models
 gem 'mongoid', '>= 6.0.0', git: 'https://github.com/mongodb/mongoid'
 gem 'paperclip', '~> 5.0.0.beta1'
