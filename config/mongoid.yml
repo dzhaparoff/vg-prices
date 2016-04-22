@@ -18,3 +18,13 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+production:
+  clients:
+    default:
+      database: <%= ENV['mongodb_db'] %>
+      hosts:
+        - localhost:27017
+      options:
+         user: <%= ENV['mongodb_user'] %>
+         password: <%= ENV['mongodb_pass'] %>
+  options:
