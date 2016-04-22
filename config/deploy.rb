@@ -91,6 +91,7 @@ namespace :deploy do
     on roles(:app) do
       execute "cd '#{shared_path}/frontend'; npm install"
       execute "cd '#{shared_path}/frontend'; bower install"
+      execute "cd '#{current_path}/frontend'; npm run precompile"
 
       # Here we can do anything such as:
       # within release_path do

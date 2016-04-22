@@ -1,0 +1,20 @@
+{
+  "name": "prices-app",
+  "version": "0.0.1",
+  "description": "App for parsing and combine multiple price stylesheets",
+  "author": "Ed Dzhaparoff",
+  "private": true,
+  "main": "gulpfile.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "~6.2.0",
+    "motion-ui": "~1.2.2",
+    "moment": "^2.12.0"
+  }
+}
