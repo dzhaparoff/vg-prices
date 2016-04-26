@@ -170,12 +170,12 @@ class Offer
       yield
       self.offer_prices.create(
           name: self.price_name,
-          amount: self.price,
+          amount: self.price.ceil,
           currency: self.currency
       )
       self.offer_prices.create(
           name: "Закупочная",
-          amount: self.price - self.price * self.sheet.price_config.purchase_markup / 100,
+          amount: (self.price - self.price * self.sheet.price_config.purchase_markup / 100).ceil,
           currency: self.currency,
           catalog_group_id: 2
       )
@@ -189,6 +189,8 @@ class Offer
           retail_price = self.price + self.price * v[1].to_i / 100
         end
       end
+
+      retail_price = retail_price.ceil
 
       self.offer_prices.create(
           name: "Розничная",
