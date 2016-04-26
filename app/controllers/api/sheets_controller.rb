@@ -15,6 +15,8 @@ class Api::SheetsController < Api::ApiController
   def update
     @sheet = Price.find(params[:price_id]).sheets.find(params[:id])
     @sheet.update(sheet_params)
+    @sheet.price_config.retail_markup = params[:price_config][:retail_markup].to_hash
+    @sheet.price_config.save
     render :show
   end
 

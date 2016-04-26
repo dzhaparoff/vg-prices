@@ -28,5 +28,10 @@ export class PriceConfig {
   price_column: string;
   default_currency: string;
   purchase_markup: number;
-  retail_markup: number;
+  retail_markup: any;
+}
+
+export class PurchaseMarkup {
+  price: number;
+  value: number;
 }

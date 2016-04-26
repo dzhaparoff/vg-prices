@@ -131,7 +131,8 @@ class PriceConfig
   field :default_currency, type: String
 
   field :purchase_markup, type: Integer, default: 0
-  field :retail_markup, type: Integer, default: 0
+
+  field :retail_markup, type: Hash, default: {'0': 0}
 
   field :extended, type: Boolean, default: false
 
@@ -178,9 +179,20 @@ class Offer
           currency: self.currency,
           catalog_group_id: 2
       )
+
+      retail_price = 0
+
+      self.sheet.price_config.retail_markup.sort_by { |price, v| -price.to_i }.each do |v|
+        if self.price.to_f <= v[0].to_f
+          retail_price = self.price + self.price * v[1].to_i / 100
+        elsif retail_price == 0 && v[0].to_i == 0
+          retail_price = self.price + self.price * v[1].to_i / 100
+        end
+      end
+
       self.offer_prices.create(
           name: "Розничная",
-          amount: self.price + self.price * self.sheet.price_config.retail_markup / 100,
+          amount: retail_price,
           currency: self.currency,
           catalog_group_id: 1
       )

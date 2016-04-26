@@ -2,7 +2,7 @@ import { Component, Injector }         from 'angular2/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES, NgForm, NgClass, NgStyle } from 'angular2/common';
 import { ROUTER_DIRECTIVES, Router, RouteConfig, RouteParams, OnActivate, ComponentInstruction } from 'angular2/router';
 
-import { Price, Sheet, PriceConfig }  from './../../models/Price'
+import { Price, Sheet, PriceConfig, PurchaseMarkup }  from './../../models/Price'
 import { PriceService }               from './../../services/price.service'
 
 //noinspection TypeScriptCheckImport
@@ -30,6 +30,7 @@ export class SheetEditComponent implements OnActivate {
   public simple_configuration: SheetSimpleConfiguration;
   public data_loaded: boolean = false;
   public currencies: string[];
+  public retail_markup: PurchaseMarkup[];
 
   public configuration_type: string = 'simple';
   public configuration_types: Object[] = [
@@ -47,6 +48,7 @@ export class SheetEditComponent implements OnActivate {
     this.sheet.price_config = new PriceConfig;
     this._parent_params = this._injector.parent.parent.get(RouteParams);
     this.currencies = ['RUB', 'USD', 'EUR', 'JPY'];
+    this.retail_markup = [];
   }
 
   getSheet() {
@@ -62,7 +64,26 @@ export class SheetEditComponent implements OnActivate {
       last_column: sheet.last_column
     };
     this.simple_configuration.columns = _.range(sheet.first_column, sheet.last_column + 1, 1);
+
+    _.each(sheet.price_config.retail_markup, (v, k) => {
+      this.retail_markup.push({
+        price: parseInt(k),
+        value: parseInt(v)
+      });
+    });
+
     this.data_loaded = true;
+  }
+
+  addRetailMarkup(){
+    this.retail_markup.push({
+      price: 0,
+      value: 0
+    });
+  }
+
+  removeRetailMarkup(index) {
+    _.pullAt(this.retail_markup, index);
   }
 
   selectColumn(column: string, number: number){
@@ -94,6 +115,12 @@ export class SheetEditComponent implements OnActivate {
   }
 
   updateSheet(){
+    this.sheet.price_config.retail_markup = {};
+    
+    _.each(this.retail_markup, (v)=>{
+      this.sheet.price_config.retail_markup[v.price] = v.value;
+    });
+
     this._priceService.update_sheet(this.price_id, this.id, this.sheet).subscribe(
         sheet => {
           this.sheet = <Sheet> sheet;

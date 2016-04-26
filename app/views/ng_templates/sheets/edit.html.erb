@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="row p-t-20" *ngIf="data_loaded">
-        <div class="medium-4 columns">
+        <div class="medium-6 columns">
           <label>Валюта
           <div class="select-currency">
             <div class="option button hollow"
@@ -52,15 +52,42 @@
           </div>
           </label>
         </div>
-        <div class="medium-4 columns">
+        <div class="medium-6 columns text-right">
           <label for="markup">Цена закупки меньше на
             <input type="text" id="markup" placeholder="наценка в %" [(ngModel)]="sheet.price_config.purchase_markup">
           </label>
         </div>
-        <div class="medium-4 columns">
-          <label for="markup">Наценка продажи
-            <input type="text" id="markup" placeholder="наценка в %" [(ngModel)]="sheet.price_config.retail_markup">
+      </div>
+
+      <div class="row p-t-20">
+        <div class="columns small-12">
+          <h5>Правила наценки</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-5 columns">
+          Наценка продажи
+        </div>
+        <div class="small-5 columns small-pull-2">
+          При цене товара меньше чем
+        </div>
+      </div>
+
+      <div class="row" *ngFor="#markup of retail_markup; #index = index; #last = last">
+        <div class="small-5 columns">
+          <label for="retail_markup">
+            <input type="text" placeholder="наценка в %" [(ngModel)]="markup.value">
           </label>
+        </div>
+        <div class="small-5 columns">
+          <label for="retail_markup">
+            <input type="text" placeholder="цена товара больше" [(ngModel)]="markup.price">
+          </label>
+        </div>
+        <div class="small-2 columns">
+          <button type="button" *ngIf="retail_markup.length > 1" class="button alert hollow" (click)="removeRetailMarkup(index)">удалить</button>
+          <button type="button" *ngIf="last" class="button hollow" (click)="addRetailMarkup()">+</button>
         </div>
       </div>
 
