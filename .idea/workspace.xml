@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c3feff75-27fe-4ffd-bf60-9121b1b81ee8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/frontend/src/typescripts/main/component.controller.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/frontend/src/typescripts/main/services/loading.service.ts" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/frontend/src/typescripts/main/services/loading.ts" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/api/prices_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/api/prices_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/ng_templates/prices/list.html.erb" afterPath="$PROJECT_DIR$/app/views/ng_templates/prices/list.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/src/stylesheets/app.scss" afterPath="$PROJECT_DIR$/frontend/src/stylesheets/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/src/typescripts/bootstrap.ts" afterPath="$PROJECT_DIR$/frontend/src/typescripts/bootstrap.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/src/typescripts/prices/components/list.ts" afterPath="$PROJECT_DIR$/frontend/src/typescripts/prices/components/list.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/src/typescripts/prices/services/price.service.ts" afterPath="$PROJECT_DIR$/frontend/src/typescripts/prices/services/price.service.ts" />
     </list>
     <ignored path="prices.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,7 +38,7 @@
       <file leaf-file-name="loading.service.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/typescripts/main/services/loading.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
+            <state relative-caret-position="375">
               <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
@@ -55,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/stylesheets/app.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="282">
@@ -65,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="prices_controller.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="prices_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/api/prices_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="50">
+              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -202,8 +194,8 @@
         <option value="$PROJECT_DIR$/app/views/ng_templates/prices/list.html.erb" />
         <option value="$PROJECT_DIR$/frontend/src/typescripts/main/component.controller.ts" />
         <option value="$PROJECT_DIR$/frontend/src/typescripts/main/services/loading.service.ts" />
-        <option value="$PROJECT_DIR$/app/controllers/api/prices_controller.rb" />
         <option value="$PROJECT_DIR$/frontend/src/stylesheets/app.scss" />
+        <option value="$PROJECT_DIR$/app/controllers/api/prices_controller.rb" />
       </list>
     </option>
   </component>
@@ -1066,7 +1058,7 @@
       <workItem from="1461577884400" duration="1840000" />
       <workItem from="1461595241464" duration="5090000" />
       <workItem from="1461656669844" duration="621000" />
-      <workItem from="1461660246860" duration="19756000" />
+      <workItem from="1461660246860" duration="19777000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1461319835440</created>
@@ -1173,11 +1165,18 @@
       <option name="project" value="LOCAL" />
       <updated>1461673639868</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="init commit">
+      <created>1461763799842</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1461763799843</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44394000" />
+    <option name="totallyTimeSpent" value="44415000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1626,9 +1625,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/stylesheets/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/typescripts/main/services/loading.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
+        <state relative-caret-position="375">
           <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
@@ -1638,16 +1645,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/api/prices_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/stylesheets/app.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="62" column="23" selection-start-line="62" selection-start-column="23" selection-end-line="62" selection-end-column="23" />
+        <state relative-caret-position="50">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
           <folding />
         </state>
       </provider>
