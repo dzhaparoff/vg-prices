@@ -12,9 +12,7 @@ export class PriceService {
   constructor (
       private http: Http,
       public loading: LoadingService
-  ) {
-    console.log(this.loading)
-  }
+  ) { }
 
   private _PricesUrl = '/api/prices';  // URL to web api
 
@@ -52,6 +50,7 @@ export class PriceService {
 
   show(id: string) {
     this.loading.startLoading('show', 'prices');
+
     return this.http.get(`${this._PricesUrl}/${id}`)
         .map(res => <Price> res.json())
         .do(data => this.loading.stopLoading('show', 'prices'))
@@ -102,31 +101,34 @@ export class PriceService {
   }
 
   patch_action(action: string, id: string, d: Object) {
+    this.loading.startLoading(action, 'prices');
     let data = JSON.stringify(d);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     return this.http.patch(`${this._PricesUrl}/${id}/${action}`, data, options)
         .map(res => res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading(action, 'prices'))
         .catch(this.handleError)
   }
 
   collection_action(action: string, data: Object) {
+    this.loading.startLoading(action, 'prices');
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(`${this._PricesUrl}/${action}`, body, options)
         .map(res => res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading(action, 'prices'))
         .catch(this.handleError)
   }
 
   patch_action_sheet(action: string, price_id: string, id: string, data: Object) {
+    this.loading.startLoading(action, 'sheets');
     return this.http.patch(`${this._PricesUrl}/${price_id}/sheets/${id}/${action}`, JSON.stringify(data))
         .map(res => res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading(action, 'sheets'))
         .catch(this.handleError)
   }
 

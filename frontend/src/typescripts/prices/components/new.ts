@@ -5,21 +5,27 @@ import { ROUTER_DIRECTIVES, Router, OnActivate, ComponentInstruction } from 'ang
 import { Price }             from './../models/Price'
 import { PriceService }      from './../services/price.service'
 
+import { ComponentController }  from './../../main/component.controller';
+import { LoadingService }       from './../../main/services/loading.service'
+
 @Component({
   selector:    'app-price-new',
   templateUrl: '/ng/templates/prices/new.tmpl.html',
   directives: [ ROUTER_DIRECTIVES ]
 })
 
-export class PriceNewComponent implements OnActivate {
+export class PriceNewComponent extends ComponentController implements OnActivate {
 
+  collection: string = 'prices';
   price: Price;
   errorMessage: any;
 
   constructor(
       private _router: Router,
-      private _priceService: PriceService
+      private _priceService: PriceService,
+      private _loading: LoadingService
   ) {
+    super(_loading);
     this.price = new Price
   }
 

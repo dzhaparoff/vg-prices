@@ -3,7 +3,7 @@
     <div class="columns small-12 medium-1">
       <button [routerLink]="['ExportsList']">&larr; Назад</button>
     </div>
-    <div class="columns small-10 small-pull-1">
+    <div class="columns small-10 small-pull-1" [ngClass]="loading_class">
       <div class="row">
         <div class="columns small-12">
           <h5>Детали выгрузки</h5>

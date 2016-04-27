@@ -7,6 +7,9 @@ import { PriceService }      from './../../services/price.service'
 
 import { PricesShowComponent }      from './../show'
 
+import { ComponentController }  from './../../../main/component.controller';
+import { LoadingService }       from './../../../main/services/loading.service'
+
 import { FormattedDatePipe } from './../../../pipes/formatted_date.pipe';
 
 @Component({
@@ -16,7 +19,8 @@ import { FormattedDatePipe } from './../../../pipes/formatted_date.pipe';
   pipes: [ FormattedDatePipe ]
 })
 
-export class SheetListComponent implements OnActivate {
+export class SheetListComponent extends ComponentController implements OnActivate {
+  public collection: string = 'sheets';
   public price_id: string;
   public sheets: Sheet[];
   public price_component: Object;
@@ -27,8 +31,10 @@ export class SheetListComponent implements OnActivate {
       private _parent_params: RouteParams,
       private _priceService: PriceService,
       private _router: Router,
-      private _injector: Injector
+      private _injector: Injector,
+      private _loading: LoadingService
   ) {
+    super(_loading);
     this.sheets = [];
     this._parent_params = this._injector.parent.parent.get(RouteParams);
   }

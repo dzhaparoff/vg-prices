@@ -15,6 +15,9 @@ import { PricesEditComponent }  from './edit'
 import { SheetListComponent }   from './sheets/list'
 import { SheetEditComponent }   from './sheets/edit'
 
+import { ComponentController }  from './../../main/component.controller';
+import { LoadingService }       from './../../main/services/loading.service'
+
 @RouteConfig([
   {
     path: '/',
@@ -35,8 +38,9 @@ import { SheetEditComponent }   from './sheets/edit'
   pipes: [ FileSizePipe, FormattedDatePipe ]
 })
 
-export class PricesShowComponent implements OnActivate {
+export class PricesShowComponent extends ComponentController implements OnActivate {
 
+  collection: string = 'prices';
   price :Price;
   errorMessage :any;
   id :string;
@@ -47,9 +51,11 @@ export class PricesShowComponent implements OnActivate {
   constructor(
       private _params: RouteParams,
       private _priceService: PriceService,
-      private _router: Router
+      private _router: Router,
+      private _loading: LoadingService
   ) {
-    this.price = new Price
+    super(_loading);
+    this.price = new Price;
   }
 
   private dragFileOver(e:boolean) {

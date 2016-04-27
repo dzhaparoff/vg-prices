@@ -15,25 +15,22 @@ export class ComponentController {
 
   private _loading_subscription: Rx.Subscription;
   
-  constructor(_loading){
+  constructor(_loading) {
     this.loading_observable = _loading.eventStream.filter((e) => { return e.loading.collection == this.collection });
     this._loading_subscription = this.loading_observable.subscribe(
-        (l)=>{
+        (l) => {
+          console.log(l);
           this.loading        = l.loading.loading;
           this.loading_class  = l.loading.loading_class;
         }
     );
   }
 
-  getLoading(){
-    console.log(this.loading_observable);
-  }
-
-  ngOnInit(){
+  ngOnInit() {
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this._loading_subscription.unsubscribe();
   }
 }

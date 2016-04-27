@@ -5,6 +5,9 @@ import { ROUTER_DIRECTIVES, Router, RouteConfig, RouteParams, OnActivate, Compon
 import { Price, Sheet, PriceConfig, PurchaseMarkup }  from './../../models/Price'
 import { PriceService }               from './../../services/price.service'
 
+import { ComponentController }  from './../../../main/component.controller';
+import { LoadingService }       from './../../../main/services/loading.service'
+
 //noinspection TypeScriptCheckImport
 import _ from "lodash"
 
@@ -21,7 +24,8 @@ interface SheetSimpleConfiguration {
   pipes: [  ]
 })
 
-export class SheetEditComponent implements OnActivate {
+export class SheetEditComponent extends ComponentController implements OnActivate {
+  public collection: string = 'sheets';
   public price_id: string;
   public price: Price;
   public id: string;
@@ -42,8 +46,10 @@ export class SheetEditComponent implements OnActivate {
       private _parent_params: RouteParams,
       private _priceService: PriceService,
       private _router: Router,
-      private _injector: Injector
+      private _injector: Injector,
+      private _loading: LoadingService
   ) {
+    super(_loading);
     this.sheet = new Sheet;
     this.sheet.price_config = new PriceConfig;
     this._parent_params = this._injector.parent.parent.get(RouteParams);

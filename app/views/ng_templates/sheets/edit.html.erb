@@ -2,7 +2,7 @@
   <div class="columns small-12">
     <h5><a [routerLink]="['PricesEdit']">&larr;</a> Страница {{sheet.name}}</h5>
   </div>
-  <div class="columns small-12">
+  <div class="columns small-12" [ngClass]="loading_class">
     <form (ngSubmit)="updateSheet()">
       <div class="row p-t-20" *ngIf="data_loaded">
         <div class="columns medium-6">
@@ -102,27 +102,29 @@
 </div>
 
 <div class="row p-t-20" *ngIf="sheet.offers_parsed">
-  <h5>Товары на странице</h5>
-  <table class="hover">
-    <thead>
-      <tr>
-        <th>Название</th>
-        <th>Артикул</th>
-        <th>Валюта</th>
-        <th>Цена в прайсе</th>
-        <th>Закупочная</th>
-        <th>Розничная</th>
+  <div class="columns small-12" [ngClass]="loading_class">
+    <h5>Товары на странице</h5>
+    <table class="hover">
+      <thead>
+        <tr>
+          <th>Название</th>
+          <th>Артикул</th>
+          <th>Валюта</th>
+          <th>Цена в прайсе</th>
+          <th>Закупочная</th>
+          <th>Розничная</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="#offer of sheet.offers">
+        <td>{{offer.name}}</td>
+        <td>{{offer.sku}}</td>
+        <td>{{offer.offer_prices[0].currency}}</td>
+        <td>{{offer.offer_prices[0].amount}}</td>
+        <td>{{offer.offer_prices[1].amount}}</td>
+        <td>{{offer.offer_prices[2].amount}}</td>
       </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="#offer of sheet.offers">
-      <td>{{offer.name}}</td>
-      <td>{{offer.sku}}</td>
-      <td>{{offer.offer_prices[0].currency}}</td>
-      <td>{{offer.offer_prices[0].amount}}</td>
-      <td>{{offer.offer_prices[1].amount}}</td>
-      <td>{{offer.offer_prices[2].amount}}</td>
-    </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>

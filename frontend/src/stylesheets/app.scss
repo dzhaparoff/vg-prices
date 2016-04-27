@@ -57,7 +57,13 @@ table {
       pointer-events: none;
     }
   }
+  &.loaded.first-load {
+    &:after {
+      opacity: 0.8;
+    }
+  }
   &:after {
+    opacity: 0;
     content: " ";
     display: block;
     position: absolute;

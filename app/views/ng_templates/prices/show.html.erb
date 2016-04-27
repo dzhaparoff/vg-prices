@@ -13,7 +13,7 @@
         <div class="columns small-12">
           <form (ngSubmit)="updatePrice()">
             <div class="row">
-              <div class="medium-12 columns">
+              <div class="medium-12 columns" [ngClass]="loading_class">
                 <div class="row">
                   <div class="columns medium-9">
                     <div class="row">

@@ -7,6 +7,9 @@ import { FileSizePipe } from './../../pipes/filesize.pipe';
 import { Export } from './../models/Export'
 import { ExportService } from './../services/export.service'
 
+import { ComponentController }  from './../../main/component.controller';
+import { LoadingService }       from './../../main/services/loading.service'
+
 //noinspection TypeScriptCheckImport
 import _ from 'lodash'
 
@@ -17,8 +20,8 @@ import _ from 'lodash'
   pipes: [ FormattedDatePipe, FileSizePipe ]
 })
 
-export class ExportsListComponent implements OnActivate {
-
+export class ExportsListComponent extends ComponentController implements OnActivate {
+  collection: string = 'exports';
   exports: Export[];
   errorMessage: any;
   selected_exports: Export[] = [];
@@ -26,9 +29,10 @@ export class ExportsListComponent implements OnActivate {
 
   constructor(
       params: RouteParams,
-      private _exportService: ExportService
+      private _exportService: ExportService,
+      private _loading: LoadingService
   ) {
-
+    super(_loading);
   }
 
   routerOnActivate(to: ComponentInstruction, from: ComponentInstruction) {

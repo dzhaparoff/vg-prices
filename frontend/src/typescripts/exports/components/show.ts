@@ -10,6 +10,9 @@ import { ExportService } from './../services/export.service'
 import { FileSizePipe }         from './../../pipes/filesize.pipe';
 import { FormattedDatePipe }    from './../../pipes/formatted_date.pipe';
 
+import { ComponentController }  from './../../main/component.controller';
+import { LoadingService }       from './../../main/services/loading.service'
+
 @Component({
   selector:    'app-export-show',
   templateUrl: '/ng/templates/exports/show.tmpl.html',
@@ -17,8 +20,8 @@ import { FormattedDatePipe }    from './../../pipes/formatted_date.pipe';
   pipes: [ FileSizePipe, FormattedDatePipe ]
 })
 
-export class ExportsShowComponent implements OnActivate {
-
+export class ExportsShowComponent extends ComponentController implements OnActivate {
+  collection: string = 'exports';
   export_element: Export;
   errorMessage: any;
   id: string;
@@ -32,8 +35,10 @@ export class ExportsShowComponent implements OnActivate {
   constructor(
       private _params: RouteParams,
       private _exportService: ExportService,
-      private _router: Router
+      private _router: Router,
+      private _loading: LoadingService
   ) {
+    super(_loading);
     this.export_element = new Export
   }
 
