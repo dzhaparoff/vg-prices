@@ -1,10 +1,13 @@
 import { Component } from 'angular2/core';
 import { ROUTER_DIRECTIVES, RouteParams, OnActivate, ComponentInstruction } from 'angular2/router';
 
-import { FormattedDatePipe } from './../../pipes/formatted_date.pipe';
+import { FormattedDatePipe }    from './../../pipes/formatted_date.pipe';
 
-import { Price } from './../models/Price'
-import { PriceService } from './../services/price.service'
+import { ComponentController }  from './../../main/component.controller';
+import { LoadingService }       from './../../main/services/loading.service'
+
+import { Price }                from './../models/Price'
+import { PriceService }         from './../services/price.service'
 
 //noinspection TypeScriptCheckImport
 import _ from 'lodash'
@@ -16,16 +19,19 @@ import _ from 'lodash'
   pipes: [ FormattedDatePipe ]
 })
 
-export class PriceListComponent implements OnActivate {
+export class PriceListComponent extends ComponentController implements OnActivate {
 
+  collection: string = 'prices';
   prices: Price[];
   errorMessage: any;
   selected_prices: Price[] = [];
 
   constructor(
       params: RouteParams,
-      private _priceService: PriceService
+      private _priceService: PriceService,
+      private _loading: LoadingService
   ) {
+    super(_loading);
 
   }
 
@@ -35,7 +41,7 @@ export class PriceListComponent implements OnActivate {
 
   getPrices() {
     this._priceService.query().subscribe(
-        prices => { this.prices = prices; console.log(this.prices) },
+        prices => { this.prices = prices; },
         error  => this.errorMessage = <any>error);
   }
 

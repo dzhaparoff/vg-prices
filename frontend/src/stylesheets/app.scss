@@ -43,6 +43,44 @@ table {
   padding: rem-calc(40px) 0;
 }
 
+.loading-control {
+  position: relative;
+  &.loading {
+    &:after {
+      opacity: .8;
+      pointer-events: all;
+    }
+  }
+  &.loaded {
+    &:after {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  &:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    min-height: rem-calc(52px);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00aeef;
+    background-image: url('/img/loading.gif');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: rem-calc(216);
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  &.columns {
+    &:after {
+      left: 0.9375rem;
+      right: 0.9375rem;
+    }
+  }
+}
 
 
 .file-loader-wrapper {

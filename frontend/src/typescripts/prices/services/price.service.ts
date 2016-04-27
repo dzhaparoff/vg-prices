@@ -4,24 +4,36 @@ import { Observable }   from 'rxjs/Observable';
 
 import { Price, Sheet } from './../models/Price'
 
+import { LoadingService } from './../../main/services/loading.service'
+
 @Injectable()
 
 export class PriceService {
-  constructor (private http: Http) {}
+  constructor (
+      private http: Http,
+      public loading: LoadingService
+  ) {
+    console.log(this.loading)
+  }
 
   private _PricesUrl = '/api/prices';  // URL to web api
 
   query() {
+    this.loading.startLoading('query', 'prices');
     return this.http.get(this._PricesUrl)
         .map(res => <Price[]> res.json())
-        .do(data => console.log(data))
+        .do(data => {
+          this.loading.stopLoading('query', 'prices');
+          }
+        )
         .catch(this.handleError);
   }
 
   query_sheets(id: string){
+    this.loading.startLoading('query', 'sheets');
     return this.http.get(`${this._PricesUrl}/${id}/sheets`)
         .map(res => <Sheet[]> res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading('query', 'sheets'))
         .catch(this.handleError);
   }
 
@@ -30,23 +42,27 @@ export class PriceService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
+    this.loading.startLoading('new', 'prices');
+
     return this.http.post(this._PricesUrl, body, options)
         .map(res => <Price> res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading('new', 'prices'))
         .catch(this.handleError)
   }
 
   show(id: string) {
+    this.loading.startLoading('show', 'prices');
     return this.http.get(`${this._PricesUrl}/${id}`)
         .map(res => <Price> res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading('show', 'prices'))
         .catch(this.handleError);
   }
 
   show_sheet(price_id: string, id: string) {
+    this.loading.startLoading('show', 'sheets');
     return this.http.get(`${this._PricesUrl}/${price_id}/sheets/${id}`)
         .map(res => <Sheet> res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading('show', 'sheets'))
         .catch(this.handleError);
   }
 
@@ -55,9 +71,11 @@ export class PriceService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
+    this.loading.startLoading('update', 'prices');
+
     return this.http.put(`${this._PricesUrl}/${id}`, body, options)
         .map(res => <Price> res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading('update', 'prices'))
         .catch(this.handleError)
   }
 
@@ -66,17 +84,20 @@ export class PriceService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
+    this.loading.startLoading('update', 'sheets');
+
     return this.http.put(`${this._PricesUrl}/${price_id}/sheets/${id}`, body, options)
         .map(res => <Sheet> res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading('update', 'sheets'))
         .catch(this.handleError)
   }
 
   destroy(price: Price) {
     const id = price.id.$oid;
+    this.loading.startLoading('destroy', 'prices');
     return this.http.delete(`${this._PricesUrl}/${id}`)
         .map(res => <Price> res.json())
-        .do(data => console.log(data))
+        .do(data => this.loading.stopLoading('destroy', 'prices'))
         .catch(this.handleError)
   }
 

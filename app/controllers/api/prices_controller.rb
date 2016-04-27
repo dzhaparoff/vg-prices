@@ -1,6 +1,7 @@
 class Api::PricesController < Api::ApiController
   def index
     @prices = Price.all
+    sleep 2
   end
 
   def new
