@@ -175,14 +175,15 @@ class Offer
     if (self.price.present? && self.price.to_i > 0) &&
         self.sku.present? && self.name.present?
       yield
+      price = self.price.to_f
       self.offer_prices.create(
           name: self.price_name,
-          amount: self.price.ceil,
+          amount: price.ceil,
           currency: self.currency
       )
       self.offer_prices.create(
           name: "Закупочная",
-          amount: (self.price - self.price * self.sheet.price_config.purchase_markup / 100).ceil,
+          amount: (price - price * self.sheet.price_config.purchase_markup / 100).ceil,
           currency: self.currency,
           catalog_group_id: 2
       )
@@ -190,10 +191,10 @@ class Offer
       retail_price = 0
 
       self.sheet.price_config.retail_markup.sort_by { |price, v| -price.to_i }.each do |v|
-        if self.price.to_f <= v[0].to_f
-          retail_price = self.price + self.price * v[1].to_i / 100
+        if price <= v[0].to_f
+          retail_price = price + price * v[1].to_i / 100
         elsif retail_price == 0 && v[0].to_i == 0
-          retail_price = self.price + self.price * v[1].to_i / 100
+          retail_price = price + price * v[1].to_i / 100
         end
       end
 
