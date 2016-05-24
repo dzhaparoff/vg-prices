@@ -26,7 +26,7 @@ class Api::ExportsController < Api::ApiController
     res = client.post do |req|
       req.url '/app/api/v1.0/sync_offers/'
       req.headers['Content-Type'] = 'application/json'
-      req.body = Oj.dump({ offers: req_body })
+      req.body = Yajl::Encoder.encode({ offers: req_body })
     end
 
     res_body = JSON.parse(res.body)

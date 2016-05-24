@@ -23,7 +23,7 @@ gem 'mongoid-paperclip', require: 'mongoid_paperclip'
 
 # Json
 gem 'jbuilder', '~> 2.0'
-# gem 'yajl-ruby'
+gem 'yajl-ruby', require: 'yajl'
 gem 'oj'
 
 #HTTP clients
