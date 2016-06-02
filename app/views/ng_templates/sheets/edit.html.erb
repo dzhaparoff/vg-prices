@@ -1,6 +1,6 @@
 <div class="row p-t-30">
   <div class="columns small-12">
-    <h5><a [routerLink]="['PricesEdit']">&larr;</a> Страница {{sheet.name}}</h5>
+    <h5><a [routerLink]="['/prices', price_id]">&larr;</a> Страница {{sheet.name}}</h5>
   </div>
   <div class="columns small-12" [ngClass]="loading_class">
     <form (ngSubmit)="updateSheet()">
@@ -11,7 +11,7 @@
         <div class="columns medium-6">
           <div class="select-configuration-type text-right">
             <div class="hollow button" type="button"
-                    *ngFor="#conf of configuration_types"
+                    *ngFor="let conf of configuration_types"
                     [class.selected]="selectedConfiguration(conf.type)"
                     (click)="selectConfiguration(conf.type)">{{conf.title}}</div>
           </div>
@@ -24,7 +24,7 @@
         </div>
         <div class="columns small-10">
           <div class="columns-select-wrapper">
-            <div class="column-select" *ngFor="#column_number of simple_configuration.columns">
+            <div class="column-select" *ngFor="let column_number of simple_configuration.columns">
               <div class="column-header">{{column_number}}</div>
               <div class="column-body">
                 <div class="column-select-option"
@@ -46,7 +46,7 @@
           <label>Валюта
           <div class="select-currency">
             <div class="option button hollow"
-                 *ngFor="#currency of currencies"
+                 *ngFor="let currency of currencies"
                  [class.selected]="selectedCurrency(currency)"
                  (click)="selectCurrency(currency)">{{currency}}</div>
           </div>
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <div class="row" *ngFor="#markup of retail_markup; #index = index; #last = last">
+      <div class="row" *ngFor="let markup of retail_markup; let index = index; let last = last">
         <div class="small-5 columns">
           <label for="retail_markup">
             <input type="text" placeholder="наценка в %" [(ngModel)]="markup.value">
@@ -116,7 +116,7 @@
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="#offer of sheet.offers">
+      <tr *ngFor="let offer of sheet.offers">
         <td>{{offer.name}}</td>
         <td>{{offer.sku}}</td>
         <td>{{offer.offer_prices[0].currency}}</td>

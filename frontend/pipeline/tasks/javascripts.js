@@ -9,6 +9,13 @@ import { config }     from '../libs/config'
 
 const $ = plugins();
 
+export const vendor_javascripts = function() {
+  return gulp.src(config.javascripts.vendor)
+      .pipe($.sourcemaps.init())
+      .pipe($.sourcemaps.write('.'))
+      .pipe(gulp.dest(config.javascripts.vendor_dest))
+};
+
 export const javascripts = function(){
 
   const webpack_plugins = [];
@@ -71,3 +78,4 @@ export const javascripts = function(){
 };
 
 gulp.task('javascripts', javascripts);
+gulp.task('vendor_javascripts', vendor_javascripts);

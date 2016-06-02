@@ -15,6 +15,7 @@ class Price
 
   field :name, type: String
   field :sku_prefix, type: String, default: ""
+  field :deactivate_not_founded, type: Boolean, default: false
 
   class << self
     def export_all_offers ids

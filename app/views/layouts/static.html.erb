@@ -9,42 +9,22 @@
 
   <base href="/">
 
-  <script src="/node_modules/es6-shim/es6-shim.min.js"></script>
-  <script src="/node_modules/systemjs/dist/system-polyfills.js"></script>
-  <script src="/node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+  <!-- Polyfill(s) for older browsers -->
+  <script src="node_modules/core-js/client/shim.min.js"></script>
 
-  <script src="/node_modules/angular2/bundles/angular2-polyfills.js"></script>
-  <script src="/node_modules/systemjs/dist/system.src.js"></script>
-  <script src="/node_modules/rxjs/bundles/Rx.js"></script>
+  <script src="node_modules/zone.js/dist/zone.js"></script>
+  <script src="node_modules/reflect-metadata/Reflect.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
 
-  <script src="/node_modules/angular2/bundles/angular2.dev.js"></script>
-  <script src="/node_modules/angular2/bundles/router.dev.js"></script>
-  <script src="/node_modules/angular2/bundles/http.dev.js"></script>
+  <script src="/assets/systemjs.config.js"></script>
   <script>
-    System.config({
-      packages: {
-        '/assets/javascripts': {
-          format: 'register',
-          defaultExtension: 'js'
-        },
-        'node_modules': {
-          defaultExtension: 'js'
-        }
-      },
-      map: {
-        'ng2-file-upload': '/node_modules/ng2-file-upload/ng2-file-upload.js',
-        'moment': '/node_modules/moment/min/moment.min.js',
-        'lodash': '/node_modules/lodash/lodash.min.js'
-      }
-    });
-    System.import('/assets/javascripts/bootstrap')
-        .then(null, console.error.bind(console));
+    System.import('app').catch(function(err){ console.error(err); });
   </script>
 </head>
 <body>
-  <app-main>
-    <%= yield %>
-  </app-main>
-  <script src="/assets/javascripts/application.js"></script>
+<app-main>
+  <%= yield %>
+</app-main>
+<script src="/assets/app/application.js"></script>
 </body>
 </html>

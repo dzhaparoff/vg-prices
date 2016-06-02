@@ -1,5 +1,5 @@
 json.array! @prices do |price|
-  json.extract! price, :id, :created_at, :updated_at, :name, :spreadsheet, :sku_prefix
+  json.extract! price, :id, :created_at, :updated_at, :name, :spreadsheet, :sku_prefix, :deactivate_not_founded
 
   json.spreadsheet_file do
     json.loaded !price.spreadsheet_file_size.nil?

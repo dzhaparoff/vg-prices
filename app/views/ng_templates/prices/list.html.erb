@@ -20,7 +20,7 @@
             </tr>
           </thead>
           <tbody>
-          <tr *ngFor="#price of prices"
+          <tr *ngFor="let price of prices"
               [class.selected]="priceSelected(price)">
             <td class="text-center"><div class="checkbox" (click)="priceSelect(price)"></div></td>
             <td>{{price.name}}</td>
@@ -36,7 +36,7 @@
             <td class="text-center"><span *ngIf="price.spreadsheet_loaded">{{price.offers_count}}</span></td>
             <td class="text-right action-cell">
               <div class="button-group">
-                <a class="hollow button secondary" [routerLink]="['PricesShow', { id: price.id.$oid }, 'PricesEdit']">Настройки</a>
+                <a class="hollow button secondary" [routerLink]="['/prices', price.id.$oid]">Настройки</a>
                 <a class="hollow button alert"     (click)="deletePrice(price)">Удалить</a>
               </div>
             </td>

@@ -19,13 +19,18 @@ tasks:
       - "../frontend/bower_components/foundation-sites/scss"
       - "../frontend/bower_components/motion-ui/src"
   javascripts:
-    src:  javascripts/bundle.js
-    dest: javascripts
+    src:  app/bundle.js
+    dest: app
+    vendor: app/vendor/**/*
+    vendor_dest: app/vendor
     file: application.js
     modules:
       - "../../bower_components"
       - "../../node_modules"
   typescripts:
-    src:    typescripts
-    dest:   javascripts
+    src:    app
+    dest:   app
     config: ../frontend/tsconfig.json
+    definitions:
+      - ../frontend/typings/main.d.ts
+      - ../frontend/typings/tsd.d.ts

@@ -28,8 +28,11 @@ class Config {
                 switch(part){
                   case 'src'     : t[part] = path.join(this.src,  val);  break;
                   case 'dest'    : t[part] = path.join(this.dest, val); break;
-                  case 'config'  : t[part] = path.resolve(val); break;
+                  case 'config' : t[part] = path.resolve(val); break;
+                  case 'vendor' : t[part] = path.join(this.src, val);  break;
+                  case 'vendor_dest' : t[part] = path.join(this.dest, val); break;
                   case 'include' : t[part] = Config.resolve_include_array(val); break;
+                  case 'definitions' : t[part] = Config.resolve_include_array(val); break;
                   default        : t[part] = val
                 }
                 return t

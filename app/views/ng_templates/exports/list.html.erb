@@ -18,13 +18,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="#export of exports"
+        <tr *ngFor="let export of exports"
             [class.selected]="exportSelected(export)">
           <td class="text-center"><div class="checkbox" (click)="exportSelect(export)"></div></td>
           <td>{{export.created_at | formatted_date : "DD-MM-YYYY HH:mm"}}</td>
           <td>
-            <span *ngFor="#price of export.prices; #last=last">
-              <a [routerLink]="['/Prices', 'PricesShow', { id: price.id.$oid }, 'PricesEdit']">{{price.name}}</a>
+            <span *ngFor="let price of export.prices; let last=last">
+              <a [routerLink]="['/prices', price.id.$oid]">{{price.name}}</a>
               <span *ngIf="!last">, </span></span>
           </td>
           <td>
@@ -39,7 +39,7 @@
           <td><a [href]="export.file" target="_blank">Файл выгрузки</a> ({{export.file_size | filesize}})</td>
           <td class="text-right action-cell">
             <div class="button-group text-right">
-              <a *ngIf="export.exported" class="hollow button" [routerLink]="['ExportsShow', {id: export.id.$oid}]">Смотреть</a>
+              <a *ngIf="export.exported" class="hollow button" [routerLink]="['/exports', export.id.$oid]">Смотреть</a>
               <a class="hollow button alert" (click)="deleteExport(export)">Удалить</a>
             </div>
           </td>

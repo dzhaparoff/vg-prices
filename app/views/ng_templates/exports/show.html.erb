@@ -1,7 +1,7 @@
 <section class="new-form">
   <div class="row">
     <div class="columns small-12 medium-1">
-      <button [routerLink]="['ExportsList']">&larr; Назад</button>
+      <a [routerLink]="['/exports']">&larr; Назад</a>
     </div>
     <div class="columns small-10 small-pull-1" [ngClass]="loading_class">
       <div class="row">
@@ -19,8 +19,8 @@
             <tr>
               <td>Прайсы в выгрузке</td>
               <td>
-                <span *ngFor="#price of export_element.prices; #last=last">
-                  <a [routerLink]="['/Prices', 'PricesShow', { id: price.id.$oid }, 'PricesEdit']">{{price.name}}</a>
+                <span *ngFor="let price of export_element.prices; let last = last">
+                  <a [routerLink]="['/prices', price.id.$oid]">{{price.name}}</a>
                   <span *ngIf="!last">, </span>
                 </span>
               </td>
@@ -30,37 +30,30 @@
               <td>{{export_element.api_responce.offers_count}}</td>
             </tr>
             <tr>
-              <td>Товаров обработано:</td>
-              <td>{{export_element.api_responce.updated_count}}
-                <a (click)="show('updated')" *ngIf="!updated_show && export_element.api_responce.updated_count > 0">показать SKU</a>
-                <a (click)="hide('updated')" *ngIf="updated_show">скрыть SKU</a>
-                <div class="sku-list" *ngIf="updated_show">
-                  <span class="sku-item" *ngFor="#sku of export_element.api_responce.updated">
-                    {{sku}}
-                  </span>
-                </div>
-              </td>
+              <td>Товаров обновлено:</td>
+              <td>{{export_element.api_responce.updated_count}}</td>
             </tr>
             <tr>
-              <td>Товаров не найдено:</td>
-              <td>{{export_element.api_responce.not_found_count}}
-                <a (click)="show('not_found')" *ngIf="!not_found_show">показать SKU</a>
-                <a (click)="hide('not_found')" *ngIf="not_found_show">скрыть SKU</a>
-                <div class="sku-list" *ngIf="not_found_show">
-                  <span class="sku-item" *ngFor="#sku of export_element.api_responce.not_found">
-                    {{sku}}
-                  </span>
-                </div>
-              </td>
+              <td>Нет в наличии:</td>
+              <td>{{export_element.api_responce.deactivated_count}}</td>
+            </tr>
+            <tr>
+              <td>Не найдено:</td>
+              <td>{{export_element.api_responce.not_found_count}}</td>
             </tr>
           </table>
         </div>
       </div>
 
+
       <div class="row" *ngIf="loaded && export_element.api_responce.updated_count > 0">
         <div class="columns small-12">
-          <h4>Обновленные товары</h4>
-          <table class="hover">
+          <h4>
+            Обновленные товары
+            <a (click)="show('updated')" *ngIf="!updated_show && export_element.api_responce.updated_count > 0">показать</a>
+            <a (click)="hide('updated')" *ngIf="updated_show">скрыть</a>
+          </h4>
+          <table class="hover" *ngIf="updated_show">
             <thead>
             <tr>
               <th width="70"></th>
@@ -70,7 +63,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="#offer of export_element.api_responce.updated_offers">
+            <tr *ngFor="let offer of export_element.api_responce.updated_offers">
               <td><img [src]="offer.img" width="50" alt=""></td>
               <td>
                 <a class="name" [href]="offer.link" target="_blank">{{offer.name}}</a>
@@ -79,6 +72,61 @@
               <td>{{offer.old_price}} {{offer.currency}}</td>
               <td>{{offer.new_price}} {{offer.currency}}</td>
             </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="loaded && export_element.api_responce.deactivated_count > 0">
+        <div class="columns small-12">
+          <h4>
+            Товаров нет в наличии
+            <a (click)="show('deactivated')" *ngIf="!deactivated_show && export_element.api_responce.deactivated_count > 0">показать</a>
+            <a (click)="hide('deactivated')" *ngIf="deactivated_show">скрыть</a>
+          </h4>
+          <table class="hover" *ngIf="deactivated_show">
+            <thead>
+            <tr>
+              <th width="70"></th>
+              <th>Название</th>
+              <th>Старая цена</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let offer of export_element.api_responce.deactivated_offers">
+              <td><img [src]="offer.img" width="50" alt=""></td>
+              <td>
+                <a class="name" [href]="offer.link" target="_blank">{{offer.name}}</a>
+                <div class="sku">{{offer.sku}}</div>
+              </td>
+              <td>{{offer.old_price}} {{offer.currency}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="loaded && export_element.api_responce.deactivated_count > 0">
+        <div class="columns small-12">
+          <h4>
+            Не найдены на сайте
+            <a (click)="show('not_found')" *ngIf="!not_found_show && export_element.api_responce.not_found_count > 0">показать</a>
+            <a (click)="hide('not_found')" *ngIf="not_found_show">скрыть</a>
+          </h4>
+          <table class="hover" *ngIf="not_found_show">
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Название</th>
+                <th>Старая цена</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let offer of export_element.api_responce.not_found">
+                <td>{{offer.sku}}</td>
+                <td>{{offer.name}}</td>
+                <td>{{offer.price}} {{offer.currency}}</td>
+              </tr>
             </tbody>
           </table>
         </div>

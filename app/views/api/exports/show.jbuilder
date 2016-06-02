@@ -9,9 +9,13 @@ json.api_responce do
   json.offers_count export.offers_count
   json.updated export.updated
   json.updated_count export.updated.count unless export.updated.nil?
-  json.not_found export.not_found
+
   json.not_found_count export.not_found.count unless export.not_found.nil?
+  json.deactivated_count export.deactivated_offers.count unless export.deactivated_offers.nil?
+
+  json.not_found export.not_found
   json.updated_offers export.updated_offers
+  json.deactivated_offers export.deactivated_offers
 end
 
 json.prices do

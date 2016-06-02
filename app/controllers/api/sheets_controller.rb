@@ -30,7 +30,7 @@ class Api::SheetsController < Api::ApiController
   def sheet_params
     params.permit(
         :id,
-        price_config: [:name_column, :price_column, :sku_column, :default_currency, :retail_markup, :purchase_markup]
+        price_config: [:name_column, :price_column, :sku_column, :default_currency, :retail_markup, :purchase_markup, :deactivate_not_founded]
     )
   end
 end

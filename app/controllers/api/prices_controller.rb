@@ -61,6 +61,6 @@ class Api::PricesController < Api::ApiController
 
   private
   def price_params
-    params.permit(:name, :sku_prefix)
+    params.permit(:name, :sku_prefix, :deactivate_not_founded)
   end
 end

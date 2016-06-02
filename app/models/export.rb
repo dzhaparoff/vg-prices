@@ -10,6 +10,7 @@ class Export
 
   has_and_belongs_to_many :prices
   embeds_many :updated_offers
+  embeds_many :deactivated_offers
 
   field :exported_at, type: DateTime
 
@@ -31,5 +32,19 @@ class UpdatedOffer
   field :old_price, type: Float
   field :new_price, type: Float
 
+  field :currency, type: String
+end
+
+class DeactivatedOffer
+  include Mongoid::Document
+
+  embedded_in :export
+
+  field :sku, type: String
+  field :name, type: String
+  field :link, type: String
+  field :img, type: String
+
+  field :old_price, type: Float
   field :currency, type: String
 end
