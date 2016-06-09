@@ -62,6 +62,23 @@ namespace :puma do
   before :start, :make_dirs
 end
 
+namespace :frontend do
+  desc 'NPM and Bower modules install'
+  task :install_modules do
+    on roles(:app) do
+      execute "cd '#{shared_path}/frontend'; npm install"
+      execute "cd '#{shared_path}/frontend'; bower install"
+    end
+  end
+
+  desc 'Precompile frontend'
+  task :precompile do
+    on roles(:app) do
+      execute "cd '#{current_path}/frontend'; npm run precompile"
+    end
+  end
+end
+
 namespace :deploy do
 
   desc "Make sure local git is in sync with remote."

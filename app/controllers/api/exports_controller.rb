@@ -61,8 +61,6 @@ class Api::ExportsController < Api::ApiController
       end
     end
 
-    ap res_body
-
     render :index
   end
 
