@@ -34,7 +34,7 @@ gem 'faraday_middleware'
 gem 'nokogiri'
 
 #Spreadsheet parsers
-gem 'roo', '~> 2.3'
+gem 'roo', '~> 2.4.0'
 gem 'roo-xls'
 gem 'axlsx', git: 'https://github.com/randym/axlsx'
 

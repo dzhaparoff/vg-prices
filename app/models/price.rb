@@ -97,8 +97,10 @@ class Sheet
 
     self.first_row.upto(self.last_row) do |row|
 
-      sku = if sheet.respond_to?(:formatted_value)
-              sheet.cell(row, self.price_config.sku_column)
+      sku = if sheet.respond_to?(:excelx_format) &&
+          !%w|General @|.include?(sheet.excelx_format(row, self.price_config.sku_column)) &&
+          zero_padded_number?(sheet.excelx_format(row, self.price_config.sku_column))
+              zero_padded_number_format(sheet.excelx_value(row, self.price_config.sku_column), sheet.excelx_format(row, self.price_config.sku_column))
             else
               sheet.cell(row, self.price_config.sku_column)
             end
@@ -128,6 +130,14 @@ class Sheet
   def config_present?
     raise "not configured" if self.price_config.nil?
     true
+  end
+
+  def zero_padded_number? format
+    format[/0+/].length > 0
+  end
+
+  def zero_padded_number_format number, format
+    "%0#{format[/0+/].length}d"% number
   end
 end
 
