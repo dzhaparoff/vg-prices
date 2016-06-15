@@ -98,7 +98,7 @@ class Sheet
     self.first_row.upto(self.last_row) do |row|
 
       sku = if sheet.respond_to?(:formatted_value)
-              sheet.formatted_value(row, self.price_config.sku_column)
+              file.formatted_value(row, self.price_config.sku_column)
             else
               sheet.cell(row, self.price_config.sku_column)
             end
