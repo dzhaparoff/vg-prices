@@ -103,6 +103,7 @@ class Sheet
               when sku.is_a?(Integer) then sku.to_s
               when sku.is_a?(Float) then sku.to_i.to_s
               when sku.is_a?(String) then sku
+              when sku.is_a?(NilClass) then ''
               else sku.to_s
             end
 
