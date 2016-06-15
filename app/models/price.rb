@@ -97,7 +97,11 @@ class Sheet
 
     self.first_row.upto(self.last_row) do |row|
 
-      sku = sheet.respond_to?(:formatted_value) ? sheet.formatted_value(row, self.price_config.sku_column) : sheet.cell(row, self.price_config.sku_column)
+      sku = if sheet.respond_to?(:formatted_value)
+              sheet.formatted_value(row, self.price_config.sku_column)
+            else
+              sheet.cell(row, self.price_config.sku_column)
+            end
 
       sku = case
               when sku.is_a?(Integer) then sku.to_s
