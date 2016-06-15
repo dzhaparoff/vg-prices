@@ -96,14 +96,16 @@ class Sheet
     self.offers.destroy_all
 
     self.first_row.upto(self.last_row) do |row|
+
       sku = sheet.cell(row, self.price_config.sku_column)
-      # sku = case
-      #         when sku.is_a?(Integer) then sku.to_s
-      #         when sku.is_a?(Float) then sku.to_i.to_s
-      #         when sku.is_a?(String) then sku
-      #         else sku.to_s
-      #       end
-      sku = sku.to_s
+
+      sku = case
+              when sku.is_a?(Integer) then sku.to_s
+              when sku.is_a?(Float) then sku.to_i.to_s
+              when sku.is_a?(String) then sku
+              else sku.to_s
+            end
+
       self.offers.create(
           name:  sheet.cell(row, self.price_config.name_column),
           sku:   self.price.sku_prefix + sku,
