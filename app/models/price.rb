@@ -118,6 +118,8 @@ class Sheet
               else sku.to_s
             end
 
+      next if sku == "" || sku.length == 0
+
       self.offers.create(
           name:  sheet.cell(row, self.price_config.name_column),
           sku:   self.price.sku_prefix + sku,
