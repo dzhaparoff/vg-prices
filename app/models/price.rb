@@ -50,7 +50,12 @@ class Price
   protected
   def read_file
     raise 'File not set' if self.spreadsheet.nil?
-    Roo::Spreadsheet.open self.spreadsheet
+    extension = self.spreadsheet.original_filename.rpartition('.').last.to_sym
+    if extension == :xlsx
+      Roo::Excelx.new self.spreadsheet.path
+    else
+      Roo::Spreadsheet.open self.spreadsheet.path, extension: extension
+    end
   end
 end
 
@@ -97,7 +102,7 @@ class Sheet
 
     self.first_row.upto(self.last_row) do |row|
 
-      sku = if sheet.respond_to?(:excelx_format) &&
+      sku = if sheet.respond_to?(:excelx_format) && !sheet.excelx_format(row, self.price_config.sku_column).nil?
           !%w|General @|.include?(sheet.excelx_format(row, self.price_config.sku_column)) &&
           zero_padded_number?(sheet.excelx_format(row, self.price_config.sku_column))
               zero_padded_number_format(sheet.excelx_value(row, self.price_config.sku_column), sheet.excelx_format(row, self.price_config.sku_column))
