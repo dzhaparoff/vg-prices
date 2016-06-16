@@ -142,7 +142,7 @@ class Sheet
   end
 
   def zero_padded_number_format number, format
-    "%0#{format[/0+/].length}d"% number
+    "%0#{format[/0+/].length}d"% number unless format[/0+/].nil?
   end
 end
 
