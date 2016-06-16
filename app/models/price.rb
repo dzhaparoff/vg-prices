@@ -138,7 +138,7 @@ class Sheet
   end
 
   def zero_padded_number? format
-    format[/0+/].length > 0
+    !format[/0+/].nil? && format[/0+/].length > 0
   end
 
   def zero_padded_number_format number, format
