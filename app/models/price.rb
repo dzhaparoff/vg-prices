@@ -102,13 +102,29 @@ class Sheet
 
     self.first_row.upto(self.last_row) do |row|
 
-      sku = if sheet.respond_to?(:excelx_format) && !sheet.excelx_format(row, self.price_config.sku_column).nil?
-          !%w|General @|.include?(sheet.excelx_format(row, self.price_config.sku_column)) &&
-          zero_padded_number?(sheet.excelx_format(row, self.price_config.sku_column))
-              zero_padded_number_format(sheet.excelx_value(row, self.price_config.sku_column), sheet.excelx_format(row, self.price_config.sku_column))
-            else
-              sheet.cell(row, self.price_config.sku_column)
+      # ap sheet.excelx_format(row, self.price_config.sku_column)
+
+      # sku = if sheet.respond_to?(:excelx_format) && !sheet.excelx_format(row, self.price_config.sku_column).nil?
+      #   !%w|General @|.include?(sheet.excelx_format(row, self.price_config.sku_column)) &&
+      #       zero_padded_number?(sheet.excelx_format(row, self.price_config.sku_column))
+      #   zero_padded_number_format(sheet.excelx_value(row, self.price_config.sku_column), sheet.excelx_format(row, self.price_config.sku_column))
+      # else
+      #   sheet.cell(row, self.price_config.sku_column)
+      # end
+
+      sku = case
+              when sheet.respond_to?(:excelx_format) &&
+                 !sheet.excelx_format(row, self.price_config.sku_column).nil? &&
+                 !%w|General @|.include?(sheet.excelx_format(row, self.price_config.sku_column)) &&
+                  zero_padded_number?(sheet.excelx_format(row, self.price_config.sku_column))
+                then zero_padded_number_format(sheet.excelx_value(row, self.price_config.sku_column), sheet.excelx_format(row, self.price_config.sku_column))
+
+              when sheet.respond_to?(:excelx_value)
+                then sheet.excelx_value(row, self.price_config.sku_column)
+              else
+                sheet.cell(row, self.price_config.sku_column)
             end
+
 
       sku = case
               when sku.is_a?(Integer) then sku.to_s
@@ -140,7 +156,7 @@ class Sheet
   end
 
   def zero_padded_number? format
-    !format[/0+/].nil? && format[/0+/].length > 0
+    !format[/0+/].nil? && format[/0+/].length > 1
   end
 
   def zero_padded_number_format number, format
