@@ -138,6 +138,7 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     oj (2.14.6)
+    oj_mimic_json (1.0.1)
     paperclip (5.0.0.beta1)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
@@ -252,6 +253,7 @@ DEPENDENCIES
   mongoid-paperclip
   nokogiri
   oj
+  oj_mimic_json
   paperclip (~> 5.0.0.beta1)
   puma
   rack-cors

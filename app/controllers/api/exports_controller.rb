@@ -16,7 +16,7 @@ class Api::ExportsController < Api::ApiController
   def export
     @exports = Export.find(params[:ids])
 
-    client = Faraday.new('http://vse-generatori.ru')
+    client = Faraday.new('https://vse-generatori.ru')
     config = Hash.new
     config[:deactivate_not_founded] = Array.new
 
